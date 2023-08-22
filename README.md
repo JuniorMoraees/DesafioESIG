@@ -38,13 +38,15 @@ Este projeto é um desafio proposto pela empresa ESIG GROUP
 #### execute o comando para criar e executar o container
 - docker-compose up -d;
 
+## DADOS
+### insira alguns scripts para criação das funções do DB para atualizar automaticamente 
+a base de dados da nova tabela criada;
+- para inserir os dados de Cargo(valores fixos enviados no desafio)
+>
+
 
 ### Iniciando o projeto
-#### acesse o terminal(pela IDE) e execute o comando
-- mvn clean install
-
-
-Após feito isso, inicie o projeto startando a classe "DesafioEsigApplication"
+- inicie o projeto startando a classe "DesafioEsigApplication"
 
 
 
