@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xml:lang="en"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+</h:head>
+<h:body>
+    <p:panel header="Cadastro de Pessoas">
+        <h:form id="form1">
+            <h:messages />
+            <p:panelGrid columns="2">
+                <h:outputText value="Nome" />
+                <p:inputText value="#{pessoaController.pessoa.nome}" />
+
+                <h:outputText value="Email"/>
+                <p:inputText value="#{pessoaController.pessoa.email}" />
+
+                <h:outputText value="Data Nascimento" />
+                <p:inputText value="#{pessoaController.pessoa.data_nascimento}" />
+
+                <h:outputText value="Telefone" />
+                <p:inputText value="#{pessoaController.pessoa.telefone}" />
+
+                <h:outputText value="Endereco" />
+                <p:inputText value="#{pessoaController.pessoa.enderco}" />
+
+                <h:outputText value="CEP" />
+                <p:inputText value="#{pessoaController.pessoa.cep}" />
+
+                <h:outputText value="Cidade" />
+                <p:inputText value="#{pessoaController.pessoa.cidade}" />
+
+                <h:outputText value="País" />
+                <p:inputText value="#{pessoaController.pessoa.pais}" />
+
+                <h:outputText value="Usuario" />
+                <p:inputText value="#{pessoaController.pessoa.usuario}" />
+
+                <h:outputText value="Cargo" />
+                <p:selectOneMenu value="#{pessoaController.pessoa.cargo_id}" converter="CargoConverter">
+                <f:selectItems value="#{cargoController.listarCargos()}"
+                               var="cargo"
+                               itemLabel="#{cargo.nome}"
+                               itemValue="#{cargo}" />
+                </p:selectOneMenu>
+                <p:commandButton value="Gravar" action="#{pessoaController.gravar()}" update=":form1, :form2" ajax="true" />
+            </p:panelGrid>
+        </h:form>
+    </p:panel>
+    <p />
+    <p />
+    <p:panel header="Pessoas">
+        <h:form id="form2">
+            <p:dataTable value="#{pessoaController.pessoas}" var="linha" rows="5" paginator="true">
+
+                <p:column headerText="ID">
+                    <h:outputText value="#{linha.id}" />
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{linha.nome}" />
+                </p:column>
+
+                <p:column headerText="Email">
+                    <h:outputText value="#{linha.email}" />
+                </p:column>
+
+                <p:column headerText="Nascimento">
+                    <h:outputText value="#{linha.data_nascimento}" />
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{linha.telefone}" />
+                </p:column>
+
+                <p:column headerText="Endereco">
+                    <h:outputText value="#{linha.enderco}" />
+                </p:column>
+
+                <p:column headerText="CEP">
+                    <h:outputText value="#{linha.cep}" />
+                </p:column>
+
+                <p:column headerText="Cidade">
+                    <h:outputText value="#{linha.cidade}" />
+                </p:column>
+
+                <p:column headerText="País">
+                    <h:outputText value="#{linha.pais}" />
+                </p:column>
+
+                <p:column headerText="Usuário">
+                    <h:outputText value="#{linha.usuario}" />
+                </p:column>
+
+                <p:column headerText="Cargo">
+                    <h:outputText value="#{linha.cargo_id.nome}" />
+                </p:column>
+
+                <p:column headerText="Salário">
+                    <h:outputText value=" R$ #{linha.calcularSalario()}" />
+                </p:column>
+
+                <p:column headerText="Editar">
+                    <p:commandButton value="Editar" onclick="PF('ALTERA').show()" ajax="true" update=":form3" >
+                        <f:setPropertyActionListener value="#{linha}" target="#{pessoaController.pessoa}">
+                        </f:setPropertyActionListener>
+                    </p:commandButton>
+                </p:column>
+
+                <p:column headerText="Excluir">
+                    <p:commandButton value="Excluir" action="#{pessoaController.excluir()}"  ajax="true" update=":form2">
+                        <p:confirm header="Confirmar Exclusao" message="Deseja Excluir ?" />
+                        <f:setPropertyActionListener value="#{linha}" target="#{pessoaController.pessoa}">
+                        </f:setPropertyActionListener>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:growl />
+        </h:form>
+    </p:panel>
+
+    <p:confirmDialog global="true">
+        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
+
+    <p:dialog header="Atualização de Clientes" widgetVar="ALTERA" modal="true">
+        <p:panel header="Editar Dados">
+            <h:form id="form3">
+                <h:inputHidden value="#{pessoaController.pessoa.id}" />
+
+                <p:panelGrid columns="2">
+                    <h:outputText value="Nome" />
+                    <p:inputText value="#{pessoaController.pessoa.nome}" />
+
+                    <h:outputText value="Email"/>
+                    <p:inputText value="#{pessoaController.pessoa.email}" />
+
+                    <h:outputText value="Data Nascimento" />
+                    <p:inputText value="#{pessoaController.pessoa.data_nascimento}" />
+
+                    <h:outputText value="Telefone" />
+                    <p:inputText value="#{pessoaController.pessoa.telefone}" />
+
+                    <h:outputText value="Endereco" />
+                    <p:inputText value="#{pessoaController.pessoa.enderco}" />
+
+                    <h:outputText value="CEP" />
+                    <p:inputText value="#{pessoaController.pessoa.cep}" />
+
+                    <h:outputText value="Cidade" />
+                    <p:inputText value="#{pessoaController.pessoa.cidade}" />
+
+                    <h:outputText value="País" />
+                    <p:inputText value="#{pessoaController.pessoa.pais}" />
+
+                    <h:outputText value="Usuario" />
+                    <p:inputText value="#{pessoaController.pessoa.usuario}" />
+
+                    <h:outputText value="Cargo" />
+                    <p:selectOneMenu value="#{pessoaController.pessoa.cargo_id}" converter="CargoConverter">
+                        <f:selectItems value="#{cargoController.listarCargos()}"
+                                       var="cargo"
+                                       itemLabel="#{cargo.nome}"
+                                       itemValue="#{cargo}" />
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Atualizar" action="#{pessoaController.alterar()}" update=":form1, :form2, :form3" ajax="true" onclick="PF('ALTERA').hide()">
+                    </p:commandButton>
+                </p:panelGrid>
+            </h:form>
+        </p:panel>
+    </p:dialog>
+</h:body>
+</html>
