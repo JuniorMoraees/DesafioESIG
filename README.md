@@ -137,7 +137,8 @@ EXECUTE FUNCTION tr_populate_pessoa_salario();
 
 
 ### Iniciando o projeto
-- inicie o projeto startando a classe "DesafioEsigApplication"
+- inicie o projeto startando a classe "DesafioEsigApplication";
+- acesse o DBeaver para acessar o DB e na tabela "usuario" cadastre um login e senha para acesso ao sistema;
 - acesse a [pagina](http://localhost:3535/login.com)
 
 
