@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Named(value = "pessoaController")
 @ViewScoped
@@ -36,13 +37,33 @@ public class PessoaController implements Serializable {
     @Setter
     private List<Pessoa> pessoas = new ArrayList<>();
 
+    @Getter
+    @Setter
+    private Long idFiltro;
+
+    @Getter
+    @Setter
+    private List<Pessoa> pessoasFiltradas;
+
     public List<Pessoa> getPessoas() {
         try {
-            this.pessoas = repository.findAll();
+            if (idFiltro != null) {
+                this.pessoas = repository.findPessoaById(idFiltro);
+            }else {
+                this.pessoas = repository.findAll();
+            }
         }catch(Exception ex) {
             ex.printStackTrace();
         }
         return pessoas;
+    }
+
+    public void filtrarPorId() {
+        if (idFiltro != null) {
+            pessoas = repository.findPessoaById(idFiltro);
+        } else {
+            pessoas = repository.findAll();
+        }
     }
 
 

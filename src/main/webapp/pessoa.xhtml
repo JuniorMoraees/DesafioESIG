@@ -56,6 +56,9 @@
     <p />
     <p:panel header="Pessoas">
         <h:form id="form2">
+            <p:inputText value="#{pessoaController.idFiltro}" placeholder="Digite o ID para filtrar" />
+            <p:commandButton value="Buscar" action="#{pessoaController.filtrarPorId()}" update=":form2" ajax="true" />
+
             <p:dataTable value="#{pessoaController.pessoas}" var="linha" rows="5" paginator="true">
 
                 <p:column headerText="ID">
